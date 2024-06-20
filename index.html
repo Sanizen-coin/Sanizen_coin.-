@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanizen Coin Farming Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Sanizen Coin Farming Game</h1>
+    <button onclick="startFarming()">Start Farming</button>
+    <button onclick="checkBalance()">Check Balance</button>
+    <div id="balanceDisplay"></div>
+
+    <script>
+        let balance = 0;
+
+        function startFarming() {
+            alert("Farming started! You will collect coins for the next 12 hours.");
+            // Simulate farming by adding coins every second for 12 hours (simulated with 12 seconds here)
+            setTimeout(() => {
+                balance += 10; // Add 10 coins after 12 hours
+                alert("Farming completed! 10 coins added to your balance.");
+                document.getElementById('balanceDisplay').innerText = 'Your balance is ' + balance + ' coins.';
+            }, 12000); // Use 43200000 for 12 hours in milliseconds
+        }
+
+        function checkBalance() {
+            alert("Your balance is " + balance + " coins.");
+            document.getElementById('balanceDisplay').innerText = 'Your balance is ' + balance + ' coins.';
+        }
+    </script>
+</body>
+</html>
