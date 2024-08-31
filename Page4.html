@@ -13,6 +13,16 @@
             margin: 0;
             padding: 0;
         }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #007bff;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
         .container {
             margin: 20px;
             padding: 20px;
@@ -22,6 +32,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             margin: 20px auto;
+            position: relative;
         }
         img {
             max-width: 100%;
@@ -42,7 +53,6 @@
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
-            text-align: center;
             cursor: pointer;
         }
         .button:hover {
@@ -75,11 +85,12 @@
         }
         .get-fund {
             display: none;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <a href="Page3.html" class="back-button">Back</a> <!-- Back button moved to the top left -->
+    
     <div class="container">
         <img src="https://i.imgur.com/v0wVqwf.jpeg" alt="Congratulations">
         <h1>Congratulations,</h1>
@@ -92,22 +103,19 @@
         </ol>
 
         <div class="button-group">
-            <a href="Page3.html" class="button">Back</a> <!-- Back button to Page3.html -->
             <button class="button" onclick="share()">Share</button>
+            <a href="https://tiksoopta.net/4/7984484" id="get-fund-button" class="button get-fund" target="_blank" rel="noopener noreferrer">Get Fund</a> <!-- Get Fund button next to Share -->
         </div>
 
         <div class="progress-container">
             <div id="progress-bar" class="progress-bar"></div>
         </div>
         <p id="message" class="message"></p>
-
-        <!-- Get Fund button, linked to Monetag ad URL -->
-        <a href="https://tiksoopta.net/4/7984484" id="get-fund-button" class="button get-fund" target="_blank" rel="noopener noreferrer">Get Fund</a>
     </div>
 
     <script>
         let progress = 0;
-        let progressSteps = [20, 45, 60, 75, 90, 92, 95, 97, 98, 100];
+        let progressSteps = [20, 45, 60, 85, 100]; // Progress steps updated as per the requirement
         let stepIndex = 0;
 
         function share() {
@@ -130,7 +138,7 @@
                 progress = progressSteps[stepIndex];
                 document.getElementById('progress-bar').style.width = progress + '%';
 
-                if (progress === 45 || progress === 75) {
+                if (progress === 45 || progress === 85) {
                     document.getElementById('message').textContent = 'You have shared to the same chat. Please share again.';
                 } else if (progress === 100) {
                     document.getElementById('message').textContent = 'Click on "Get Fund" to complete the application.';
